@@ -1,0 +1,48 @@
+{
+  "name": "@life-os/design-system",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./styles.css": "./dist/styles.css"
+  },
+  "files": [
+    "dist"
+  ],
+  "packageManager": "pnpm@10.18.0",
+  "engines": {
+    "node": ">=20.19.0"
+  },
+  "scripts": {
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build",
+    "build": "vite build",
+    "typecheck": "tsc --noEmit",
+    "static-check": "node scripts/static-check.mjs",
+    "check": "pnpm static-check && pnpm typecheck && pnpm build-storybook && pnpm build"
+  },
+  "peerDependencies": {
+    "react": ">=19",
+    "react-dom": ">=19"
+  },
+  "devDependencies": {
+    "@storybook/addon-a11y": "^10.6.0",
+    "@storybook/addon-docs": "^10.6.0",
+    "@storybook/react-vite": "^10.6.0",
+    "@types/react": "^19.1.0",
+    "@types/react-dom": "^19.1.0",
+    "@vitejs/plugin-react": "^5.0.0",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "storybook": "^10.6.0",
+    "typescript": "^5.9.0",
+    "vite": "^7.1.0",
+    "vite-plugin-dts": "^4.5.4"
+  }
+}

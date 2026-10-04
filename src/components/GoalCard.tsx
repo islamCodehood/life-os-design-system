@@ -1,0 +1,2 @@
+import { Card } from './Card'; import { ProgressBar } from './ProgressBar'; export interface GoalCardProps{title:string;why?:string;current:number;target:number;valueLabel?:string}
+export function GoalCard({title,why,current,target,valueLabel}:GoalCardProps){return <Card className="lo-goal-card"><div className="lo-goal-card__title">{title}</div>{why&&<div className="lo-goal-card__why">{why}</div>}<ProgressBar value={current} max={target} tone="goal" valueLabel={valueLabel??`${current} of ${target}`}/></Card>}

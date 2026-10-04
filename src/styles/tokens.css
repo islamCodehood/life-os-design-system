@@ -1,0 +1,173 @@
+:root {
+  /* Primitive / Neutral */
+  --lo-neutral-0: #ffffff;
+  --lo-neutral-25: #fcfbf7;
+  --lo-neutral-50: #f7f6f1;
+  --lo-neutral-100: #f1f0ea;
+  --lo-neutral-200: #e5e4dd;
+  --lo-neutral-300: #d5d5cc;
+  --lo-neutral-400: #acaea4;
+  --lo-neutral-500: #7a7d73;
+  --lo-neutral-700: #454840;
+  --lo-neutral-900: #23261f;
+  --lo-neutral-950: #171914;
+
+  /* Primitive / Sage */
+  --lo-sage-50: #f1f5ef;
+  --lo-sage-100: #e6ede2;
+  --lo-sage-200: #d2dfc9;
+  --lo-sage-300: #b5c8aa;
+  --lo-sage-400: #91aa85;
+  --lo-sage-500: #788f6e;
+  --lo-sage-600: #667b5e;
+  --lo-sage-700: #53654d;
+  --lo-sage-800: #414f3d;
+  --lo-sage-900: #303c2d;
+
+  /* Primitive / Supporting */
+  --lo-sky-100: #e6eff4;
+  --lo-sky-300: #b6cedb;
+  --lo-sky-500: #779bae;
+  --lo-sky-700: #506f80;
+  --lo-clay-100: #f3e6df;
+  --lo-clay-300: #ddb7a4;
+  --lo-clay-500: #b98269;
+  --lo-clay-700: #875b49;
+  --lo-gold-100: #faf0d8;
+  --lo-gold-300: #e8ca83;
+  --lo-gold-500: #bf9a4c;
+  --lo-gold-700: #8d6d31;
+  --lo-rose-100: #f7e5e3;
+  --lo-rose-300: #deb0ac;
+  --lo-rose-500: #bc7773;
+  --lo-rose-700: #8e5552;
+  --lo-lavender-100: #efeaf4;
+  --lo-lavender-300: #cfc0dc;
+  --lo-lavender-500: #9682aa;
+  --lo-lavender-700: #6e5b82;
+
+  /* Semantic / Color */
+  --lo-bg-page: var(--lo-neutral-50);
+  --lo-bg-surface: var(--lo-neutral-0);
+  --lo-bg-soft: var(--lo-neutral-100);
+  --lo-bg-selected: var(--lo-sage-100);
+  --lo-text-primary: var(--lo-neutral-900);
+  --lo-text-secondary: var(--lo-neutral-500);
+  --lo-text-inverse: var(--lo-neutral-0);
+  --lo-border-default: var(--lo-neutral-300);
+  --lo-border-subtle: var(--lo-neutral-200);
+  --lo-border-selected: var(--lo-sage-500);
+  --lo-action-primary: var(--lo-sage-700);
+  --lo-action-primary-hover: var(--lo-sage-800);
+  --lo-state-success-bg: var(--lo-sage-100);
+  --lo-state-success-fg: var(--lo-sage-700);
+  --lo-state-warning-bg: var(--lo-gold-100);
+  --lo-state-warning-fg: var(--lo-gold-700);
+  --lo-state-danger-bg: var(--lo-rose-100);
+  --lo-state-danger-fg: var(--lo-rose-700);
+  --lo-money-give: var(--lo-rose-500);
+  --lo-money-save: var(--lo-sage-500);
+  --lo-money-spend: var(--lo-sky-500);
+  --lo-progress-learning: var(--lo-sky-500);
+  --lo-progress-goal: var(--lo-lavender-500);
+  --lo-progress-family: var(--lo-clay-500);
+  --lo-progress-milestone: var(--lo-gold-500);
+
+  /* Typography */
+  --lo-font-latin: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --lo-font-arabic: "Noto Sans Arabic", "Noto Kufi Arabic", Tahoma, Arial, sans-serif;
+  --lo-weight-regular: 400;
+  --lo-weight-medium: 500;
+  --lo-weight-semibold: 600;
+  --lo-type-display-lg: 2rem;
+  --lo-type-display-md: 1.75rem;
+  --lo-type-h1: 1.5rem;
+  --lo-type-h2: 1.25rem;
+  --lo-type-h3: 1.0625rem;
+  --lo-type-body-lg: 1rem;
+  --lo-type-body-md: 0.875rem;
+  --lo-type-body-sm: 0.8125rem;
+  --lo-type-label-md: 0.75rem;
+  --lo-type-label-sm: 0.6875rem;
+  --lo-line-display: 1.2;
+  --lo-line-heading: 1.25;
+  --lo-line-body: 1.45;
+  --lo-line-arabic-body: 1.6;
+  --lo-line-label: 1.3;
+
+  /* Space */
+  --lo-space-0: 0px;
+  --lo-space-1: 4px;
+  --lo-space-2: 8px;
+  --lo-space-3: 12px;
+  --lo-space-4: 16px;
+  --lo-space-5: 20px;
+  --lo-space-6: 24px;
+  --lo-space-8: 32px;
+  --lo-space-10: 40px;
+  --lo-space-12: 48px;
+  --lo-space-16: 64px;
+  --lo-space-20: 80px;
+
+  /* Shape */
+  --lo-radius-xs: 6px;
+  --lo-radius-sm: 8px;
+  --lo-radius-md: 12px;
+  --lo-radius-lg: 16px;
+  --lo-radius-xl: 20px;
+  --lo-radius-2xl: 24px;
+  --lo-radius-full: 999px;
+  --lo-border-hair: 1px;
+  --lo-border-strong: 2px;
+
+  /* Elevation */
+  --lo-shadow-0: none;
+  --lo-shadow-1: 0 1px 2px rgba(28, 32, 24, 0.05);
+  --lo-shadow-2: 0 4px 12px rgba(28, 32, 24, 0.08);
+  --lo-shadow-3: 0 10px 30px rgba(28, 32, 24, 0.12);
+
+  /* Motion */
+  --lo-motion-instant: 100ms;
+  --lo-motion-fast: 180ms;
+  --lo-motion-normal: 280ms;
+  --lo-motion-slow: 450ms;
+  --lo-motion-milestone-min: 1200ms;
+  --lo-motion-milestone-max: 3000ms;
+  --lo-ease-standard: cubic-bezier(0.2, 0, 0, 1);
+  --lo-ease-enter: cubic-bezier(0, 0, 0, 1);
+  --lo-ease-exit: cubic-bezier(0.4, 0, 1, 1);
+
+  /* Controls */
+  --lo-control-min: 44px;
+  --lo-control-standard: 48px;
+  --lo-control-primary: 52px;
+}
+
+[data-experience="explorer"] {
+  --lo-control-standard: 52px;
+  --lo-control-primary: 56px;
+}
+
+[data-experience="builder"] {
+  --lo-control-standard: 48px;
+  --lo-control-primary: 52px;
+}
+
+[data-experience="parent"],
+[data-experience="navigator"] {
+  --lo-control-standard: 44px;
+  --lo-control-primary: 48px;
+}
+
+[lang="ar"] {
+  --lo-type-display-lg: 2.125rem;
+  --lo-type-display-md: 1.875rem;
+  --lo-type-h1: 1.625rem;
+  --lo-type-h2: 1.375rem;
+  --lo-type-h3: 1.125rem;
+  --lo-type-body-lg: 1.0625rem;
+  --lo-type-body-md: 0.9375rem;
+  --lo-type-body-sm: 0.875rem;
+  --lo-type-label-md: 0.8125rem;
+  --lo-type-label-sm: 0.75rem;
+}

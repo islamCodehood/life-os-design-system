@@ -1,0 +1,26 @@
+.lo-foundation-page {
+  display: grid;
+  gap: var(--lo-space-8);
+  max-inline-size: 1180px;
+  margin-inline: auto;
+  padding: var(--lo-space-8);
+  color: var(--lo-text-primary);
+}
+.lo-foundation-page h1,
+.lo-foundation-page h2,
+.lo-foundation-page h3,
+.lo-foundation-page p { margin-block-start: 0; }
+.lo-foundation-page h1 { margin-block-end: 0; font-size: var(--lo-type-display-lg); line-height: var(--lo-line-display); }
+.lo-foundation-page h2 { font-size: var(--lo-type-h2); line-height: var(--lo-line-heading); }
+.lo-foundation-lead { max-inline-size: 780px; color: var(--lo-text-secondary); font-size: var(--lo-type-body-lg); line-height: 1.55; }
+.lo-demo-grid, .lo-swatch-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: var(--lo-space-4); }
+.lo-card-demo { border: 1px solid var(--lo-border-default); border-radius: var(--lo-radius-lg); background: var(--lo-bg-surface); padding: var(--lo-space-5); box-shadow: var(--lo-shadow-0); }
+.lo-swatch { overflow: hidden; border: 1px solid var(--lo-border-default); border-radius: var(--lo-radius-lg); background: var(--lo-bg-surface); }
+.lo-swatch__color { block-size: 96px; background: var(--swatch); }
+.lo-swatch__meta { padding: var(--lo-space-3); display: grid; gap: var(--lo-space-1); }
+.lo-swatch__name { font-weight: 600; font-size: var(--lo-type-body-sm); }
+.lo-swatch__value { color: var(--lo-text-secondary); font-size: var(--lo-type-label-sm); font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+.lo-rule-list { margin: 0; padding-inline-start: var(--lo-space-6); display: grid; gap: var(--lo-space-2); line-height: 1.55; }
+.lo-reference-board { display: block; max-inline-size: 100%; border-radius: var(--lo-radius-xl); border: 1px solid var(--lo-border-default); box-shadow: var(--lo-shadow-1); }
+.lo-principle { border-inline-start: 4px solid var(--lo-sage-500); background: var(--lo-bg-selected); border-radius: var(--lo-radius-md); padding: var(--lo-space-4); }
+@media (max-width: 640px) { .lo-foundation-page { padding: var(--lo-space-5); } }

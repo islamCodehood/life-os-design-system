@@ -1,0 +1,2 @@
+import type { ImgHTMLAttributes } from 'react'; export type AvatarSize='sm'|'md'|'lg'; export interface AvatarProps{name:string;src?:string;size?:AvatarSize;imageProps?:Omit<ImgHTMLAttributes<HTMLImageElement>,'src'|'alt'>}
+function initials(name:string){return name.trim().split(/\s+/).slice(0,2).map(p=>p[0]?.toUpperCase()).join('')} export function Avatar({name,src,size='md',imageProps}:AvatarProps){return <span className={`lo-avatar lo-avatar--${size}`} aria-label={name}>{src?<img src={src} alt="" {...imageProps}/>:initials(name)}</span>}
