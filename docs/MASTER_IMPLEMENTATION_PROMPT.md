@@ -111,7 +111,7 @@ Until a registry release flow exists, pin the public GitHub design-system depend
 
 Current handoff commit:
 
-`islamCodehood/life-os-design-system@b69e66f589b80faf9968a2ace0e08737bfc2b8f0`
+`islamCodehood/life-os-design-system@506ab3ef3723e54df858fa0ff9e0fb3d2f06b055`
 
 Import production UI from the package and its exported stylesheet.
 
