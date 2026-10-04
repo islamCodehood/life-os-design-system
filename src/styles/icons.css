@@ -1,0 +1,57 @@
+.lo-icon {
+  display: inline-grid;
+  place-items: center;
+  inline-size: 24px;
+  block-size: 24px;
+  flex: 0 0 auto;
+  line-height: 0;
+}
+.lo-icon svg { inline-size: 100%; block-size: 100%; }
+.lo-icon--sm { inline-size: 20px; block-size: 20px; }
+.lo-icon--md { inline-size: 24px; block-size: 24px; }
+.lo-icon--lg { inline-size: 28px; block-size: 28px; }
+.lo-icon--xl { inline-size: 32px; block-size: 32px; }
+[dir="rtl"] .lo-icon--mirror-rtl { transform: scaleX(-1); }
+
+.lo-task-card[data-status="completed"] .lo-task-card__control::after { content: none; }
+.lo-task-card__control .lo-icon { inline-size: 24px; block-size: 24px; }
+
+.lo-attention-card__action { display: inline-flex; align-items: center; gap: var(--lo-space-1); }
+
+.lo-money-bucket__icon {
+  inline-size: 42px;
+  block-size: 42px;
+}
+
+.lo-bottom-nav__icon {
+  min-block-size: 30px;
+  display: grid;
+  place-items: center;
+}
+.lo-bottom-nav__item {
+  min-block-size: 58px;
+  gap: 4px;
+}
+
+.lo-side-nav__item {
+  display: flex;
+  align-items: center;
+  gap: var(--lo-space-3);
+}
+.lo-side-nav__icon {
+  inline-size: 28px;
+  display: grid;
+  place-items: center;
+  flex: 0 0 auto;
+}
+
+[data-experience="explorer"] .lo-bottom-nav__item { min-block-size: 64px; }
+[data-experience="explorer"] .lo-task-card { min-block-size: 72px; padding: 14px 16px; }
+[data-experience="explorer"] .lo-task-card__control { inline-size: 44px; block-size: 44px; border-radius: 13px; }
+[data-experience="explorer"] .lo-task-card__title { font-size: 17px; }
+[data-experience="explorer"] .lo-task-card__meta { font-size: 13px; }
+
+[data-experience="navigator"] .lo-task-card,
+[data-experience="launch"] .lo-task-card { min-block-size: 58px; padding-block: 9px; }
+[data-experience="navigator"] .lo-task-card__title,
+[data-experience="launch"] .lo-task-card__title { font-size: 14px; }

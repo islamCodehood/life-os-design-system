@@ -18,9 +18,22 @@ const preview: Preview = {
       toolbar: {
         icon: 'mirror',
         items: [
-          { value: 'explorer', title: 'Explorer' },
-          { value: 'builder', title: 'Builder' },
+          { value: 'explorer', title: 'Explorer · 6–8' },
+          { value: 'builder', title: 'Builder · 9–12' },
+          { value: 'navigator', title: 'Navigator · 13–15' },
+          { value: 'launch', title: 'Launch · 16–17' },
           { value: 'parent', title: 'Parent' },
+        ],
+      },
+    },
+    motion: {
+      description: 'Motion preference',
+      toolbar: {
+        icon: 'play',
+        items: [
+          { value: 'full', title: 'Full motion' },
+          { value: 'reduced', title: 'Reduced motion' },
+          { value: 'off', title: 'Motion off' },
         ],
       },
     },
@@ -28,6 +41,7 @@ const preview: Preview = {
   initialGlobals: {
     locale: 'en',
     experience: 'builder',
+    motion: 'full',
   },
   decorators: [
     (Story, context) => {
@@ -38,6 +52,7 @@ const preview: Preview = {
           lang={locale}
           dir={dir}
           data-experience={context.globals.experience}
+          data-motion={context.globals.motion ?? 'full'}
           style={{ minHeight: '100vh', padding: 24 }}
         >
           <Story />
@@ -46,7 +61,7 @@ const preview: Preview = {
     },
   ],
   parameters: {
-    options: { storySort: { order: ['Foundations', 'Components', 'Patterns', 'Screens'] } },
+    options: { storySort: { order: ['Foundations', 'Components', 'Patterns', 'States', 'Screens'] } },
     a11y: { test: 'todo' },
   },
 };

@@ -18,7 +18,7 @@ const runtimeVars = new Set(['lo-nav-count', 'lo-progress-value']);
 const undefinedVars = [...used].filter((x) => !defined.has(x) && !runtimeVars.has(x) && !x.startsWith('lo-shadow-'));
 
 const requiredComponents = [
-  'Button', 'IconButton', 'TextField', 'TextArea', 'SelectField', 'Toggle', 'Checkbox', 'Chip',
+  'Button', 'Icon', 'IconButton', 'TextField', 'TextArea', 'SelectField', 'Toggle', 'Checkbox', 'Chip',
   'BottomNavigation', 'SideNavigation', 'Card', 'TaskCard', 'AttentionCard', 'GoalCard', 'ProgressBar', 'MoneyBucket', 'Avatar',
 ];
 const missingComponents = requiredComponents.filter((name) => !fs.existsSync(path.join(src, 'components', `${name}.tsx`)));
@@ -34,8 +34,12 @@ const requiredCompoundPatterns = [
 ];
 const missingCompoundPatterns = requiredCompoundPatterns.filter((name) => !fs.existsSync(path.join(src, 'patterns', 'compound', `${name}.tsx`)));
 
-const requiredScreenStories = ['src/screens/CoreScreens.stories.tsx'];
-const missingScreenStories = requiredScreenStories.filter((file) => !fs.existsSync(path.join(root, file)));
+const requiredStories = [
+  'src/screens/CoreScreens.stories.tsx',
+  'src/states/InteractionStateMatrix.stories.tsx',
+  'src/components/Icon.stories.tsx',
+];
+const missingStories = requiredStories.filter((file) => !fs.existsSync(path.join(root, file)));
 
 const forbidden = [
   ['legacy los- prefix', /los-/],
@@ -45,12 +49,12 @@ const forbidden = [
 ];
 const violations = forbidden.flatMap(([label, regex]) => regex.test(source) ? [label] : []);
 
-if (undefinedVars.length || missingComponents.length || missingPatterns.length || missingCompoundPatterns.length || missingScreenStories.length || violations.length) {
+if (undefinedVars.length || missingComponents.length || missingPatterns.length || missingCompoundPatterns.length || missingStories.length || violations.length) {
   if (undefinedVars.length) console.error('Undefined CSS variables:', undefinedVars);
   if (missingComponents.length) console.error('Missing components:', missingComponents);
   if (missingPatterns.length) console.error('Missing domain patterns:', missingPatterns);
   if (missingCompoundPatterns.length) console.error('Missing compound patterns:', missingCompoundPatterns);
-  if (missingScreenStories.length) console.error('Missing screen stories:', missingScreenStories);
+  if (missingStories.length) console.error('Missing required stories:', missingStories);
   if (violations.length) console.error('Forbidden patterns:', violations);
   process.exit(1);
 }
