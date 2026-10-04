@@ -40,7 +40,6 @@
     "@playwright/test": "^1.55.0",
     "@storybook/addon-a11y": "^10.6.0",
     "@storybook/addon-docs": "^10.6.0",
-    "@storybook/addon-viewport": "^10.6.0",
     "@storybook/react-vite": "^10.6.0",
     "@types/react": "^19.1.0",
     "@types/react-dom": "^19.1.0",
