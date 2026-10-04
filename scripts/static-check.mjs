@@ -28,6 +28,15 @@ const requiredPatterns = [
 ];
 const missingPatterns = requiredPatterns.filter((name) => !fs.existsSync(path.join(src, 'patterns', `${name}.tsx`)));
 
+const requiredCompoundPatterns = [
+  'TodayResponsibilityGroup', 'ParentAttentionFeed', 'JobWorkflow', 'WalletOverview',
+  'StoryTimeline', 'GraduationEvidencePanel', 'WorldOverview', 'WeeklyReviewFlow',
+];
+const missingCompoundPatterns = requiredCompoundPatterns.filter((name) => !fs.existsSync(path.join(src, 'patterns', 'compound', `${name}.tsx`)));
+
+const requiredScreenStories = ['src/screens/CoreScreens.stories.tsx'];
+const missingScreenStories = requiredScreenStories.filter((file) => !fs.existsSync(path.join(root, file)));
+
 const forbidden = [
   ['legacy los- prefix', /los-/],
   ['undefined danger alias', /--lo-danger-fg/],
@@ -36,12 +45,14 @@ const forbidden = [
 ];
 const violations = forbidden.flatMap(([label, regex]) => regex.test(source) ? [label] : []);
 
-if (undefinedVars.length || missingComponents.length || missingPatterns.length || violations.length) {
+if (undefinedVars.length || missingComponents.length || missingPatterns.length || missingCompoundPatterns.length || missingScreenStories.length || violations.length) {
   if (undefinedVars.length) console.error('Undefined CSS variables:', undefinedVars);
   if (missingComponents.length) console.error('Missing components:', missingComponents);
   if (missingPatterns.length) console.error('Missing domain patterns:', missingPatterns);
+  if (missingCompoundPatterns.length) console.error('Missing compound patterns:', missingCompoundPatterns);
+  if (missingScreenStories.length) console.error('Missing screen stories:', missingScreenStories);
   if (violations.length) console.error('Forbidden patterns:', violations);
   process.exit(1);
 }
 
-console.log(`Static design-system checks passed (${files.length} source files, ${requiredComponents.length} core components, ${requiredPatterns.length} domain patterns).`);
+console.log(`Static design-system checks passed (${files.length} source files, ${requiredComponents.length} core components, ${requiredPatterns.length} domain patterns, ${requiredCompoundPatterns.length} compound patterns).`);
