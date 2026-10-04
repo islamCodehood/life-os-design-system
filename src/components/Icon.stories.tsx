@@ -5,6 +5,7 @@ import { Icon } from './Icon';
 const meta = {
   title: 'Components/Icon',
   component: Icon,
+  args: { icon: Home },
   parameters: { layout: 'centered' },
 } satisfies Meta<typeof Icon>;
 
