@@ -46,7 +46,7 @@ const preview: Preview = {
     },
   ],
   parameters: {
-    options: { storySort: { order: ['Foundations', 'Components', 'Patterns'] } },
+    options: { storySort: { order: ['Foundations', 'Components', 'Patterns', 'Screens'] } },
     a11y: { test: 'todo' },
   },
 };

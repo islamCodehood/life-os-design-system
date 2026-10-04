@@ -4,3 +4,4 @@ export * from './MomentCard';
 export * from './GraduationMilestone';
 export * from './MoneyAllocation';
 export * from './WorldRegion';
+export * from './compound';
