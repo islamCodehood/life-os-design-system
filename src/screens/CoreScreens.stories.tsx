@@ -1,9 +1,22 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import React from 'react';
+import {
+  ArrowRight,
+  Compass,
+  Heart,
+  Home,
+  MessageCircle,
+  Settings,
+  Sun,
+  Target,
+  Users,
+  Wallet,
+} from 'lucide-react';
 import { Avatar } from '../components/Avatar';
 import { BottomNavigation } from '../components/BottomNavigation';
 import { Card } from '../components/Card';
 import { GoalCard } from '../components/GoalCard';
+import { Icon } from '../components/Icon';
 import { SideNavigation } from '../components/SideNavigation';
 import { ParentAttentionFeed } from '../patterns/compound/ParentAttentionFeed';
 import { StoryTimeline } from '../patterns/compound/StoryTimeline';
@@ -19,22 +32,22 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 const explorerNav = [
-  { id: 'today', label: 'Today', icon: '☀' },
-  { id: 'journey', label: 'Journey', icon: '⌁' },
-  { id: 'money', label: 'Money', icon: '¤' },
-  { id: 'family', label: 'Family', icon: '⌂' },
+  { id: 'today', label: 'Today', icon: <Icon icon={Sun} size="lg" /> },
+  { id: 'journey', label: 'Journey', icon: <Icon icon={Compass} size="lg" /> },
+  { id: 'money', label: 'Money', icon: <Icon icon={Wallet} size="lg" /> },
+  { id: 'family', label: 'Family', icon: <Icon icon={Users} size="lg" /> },
 ];
 
 const builderNav = [
-  { id: 'today', label: 'Today', icon: '☀' },
-  { id: 'journey', label: 'Journey', icon: '⌁' },
-  { id: 'goals', label: 'Goals', icon: '◎' },
-  { id: 'money', label: 'Money', icon: '¤' },
-  { id: 'family', label: 'Family', icon: '⌂' },
+  { id: 'today', label: 'Today', icon: <Icon icon={Sun} size="lg" /> },
+  { id: 'journey', label: 'Journey', icon: <Icon icon={Compass} size="lg" /> },
+  { id: 'goals', label: 'Goals', icon: <Icon icon={Target} size="lg" /> },
+  { id: 'money', label: 'Money', icon: <Icon icon={Wallet} size="lg" /> },
+  { id: 'family', label: 'Family', icon: <Icon icon={Users} size="lg" /> },
 ];
 
 export const ExplorerToday: Story = {
-  parameters: { globals: { experience: 'explorer' } },
+  globals: { experience: 'explorer' },
   render: () => (
     <div className="lo-screen-stage">
       <main className="lo-mobile-screen" data-screen="explorer-today">
@@ -76,7 +89,7 @@ export const ExplorerToday: Story = {
 };
 
 export const BuilderToday: Story = {
-  parameters: { globals: { experience: 'builder' } },
+  globals: { experience: 'builder' },
   render: () => (
     <div className="lo-screen-stage">
       <main className="lo-mobile-screen" data-screen="builder-today">
@@ -117,7 +130,7 @@ export const BuilderToday: Story = {
 };
 
 export const Journey: Story = {
-  parameters: { globals: { experience: 'explorer' } },
+  globals: { experience: 'explorer' },
   render: () => (
     <div className="lo-screen-stage">
       <main className="lo-mobile-screen lo-mobile-screen--wide" data-screen="journey">
@@ -140,7 +153,7 @@ export const Journey: Story = {
           title="Latest growth"
           entries={[
             { id: 'recovery', kind: 'recovery', kindLabel: 'Recovery', title: 'You came back to reading', description: 'Missed once, then completed at the next opportunity.', occurredLabel: 'Today', visual: '🌱' },
-            { id: 'graduated', kind: 'graduation', kindLabel: 'I manage this myself', title: 'Brush teeth', description: 'This no longer needs daily active tracking.', occurredLabel: 'Recently', visual: '✓' },
+            { id: 'graduated', kind: 'graduation', kindLabel: 'I manage this myself', title: 'Brush teeth', description: 'This no longer needs daily active tracking.', occurredLabel: 'Recently', visual: '🌉' },
           ]}
         />
 
@@ -151,7 +164,7 @@ export const Journey: Story = {
 };
 
 export const ParentHome: Story = {
-  parameters: { globals: { experience: 'parent' } },
+  globals: { experience: 'parent' },
   render: () => (
     <div className="lo-parent-screen">
       <aside className="lo-parent-screen__sidebar">
@@ -159,11 +172,11 @@ export const ParentHome: Story = {
           activeId="home"
           brand={<><div>Life OS</div><small>Parent mode</small></>}
           items={[
-            { id: 'home', label: 'Home' },
-            { id: 'children', label: 'Children' },
-            { id: 'family', label: 'Family' },
-            { id: 'review', label: 'Review' },
-            { id: 'settings', label: 'Settings' },
+            { id: 'home', label: 'Home', icon: <Icon icon={Home} size="md" /> },
+            { id: 'children', label: 'Children', icon: <Icon icon={Users} size="md" /> },
+            { id: 'family', label: 'Family', icon: <Icon icon={Heart} size="md" /> },
+            { id: 'review', label: 'Review', icon: <Icon icon={MessageCircle} size="md" /> },
+            { id: 'settings', label: 'Settings', icon: <Icon icon={Settings} size="md" /> },
           ]}
         />
       </aside>
@@ -190,14 +203,14 @@ export const ParentHome: Story = {
               <h3>Fewer reminders this week</h3>
               <p>Today: 4 of 5 resolved</p>
               <p>Current focus: Reading goal</p>
-              <button type="button">View child →</button>
+              <button type="button">View child <Icon icon={ArrowRight} size="sm" mirrorInRtl /></button>
             </Card>
             <Card className="lo-child-summary">
               <div className="lo-child-summary__head"><Avatar name="Eyad" /><strong>Eyad</strong></div>
               <h3>Recovered at the next opportunity</h3>
               <p>Today: 3 of 4 resolved</p>
               <p>Morning routine: mostly independent</p>
-              <button type="button">View child →</button>
+              <button type="button">View child <Icon icon={ArrowRight} size="sm" mirrorInRtl /></button>
             </Card>
           </div>
         </section>

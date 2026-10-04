@@ -1,2 +1,42 @@
-import type { ReactNode } from 'react'; export interface SideNavigationItem{id:string;label:string;icon?:ReactNode} export interface SideNavigationProps{brand?:ReactNode;items:SideNavigationItem[];activeId:string;onChange?:(id:string)=>void;ariaLabel?:string}
-export function SideNavigation({brand='Life OS',items,activeId,onChange,ariaLabel='Parent navigation'}:SideNavigationProps){return <nav className="lo-side-nav" aria-label={ariaLabel}><div className="lo-side-nav__brand">{brand}</div>{items.map(i=><button type="button" key={i.id} className="lo-side-nav__item" data-active={i.id===activeId} aria-current={i.id===activeId?'page':undefined} onClick={()=>onChange?.(i.id)}>{i.icon&&<span style={{marginInlineEnd:8}} aria-hidden="true">{i.icon}</span>}{i.label}</button>)}</nav>}
+import type { ReactNode } from 'react';
+
+export interface SideNavigationItem {
+  id: string;
+  label: string;
+  icon?: ReactNode;
+}
+
+export interface SideNavigationProps {
+  brand?: ReactNode;
+  items: SideNavigationItem[];
+  activeId: string;
+  onChange?: (id: string) => void;
+  ariaLabel?: string;
+}
+
+export function SideNavigation({
+  brand = 'Life OS',
+  items,
+  activeId,
+  onChange,
+  ariaLabel = 'Parent navigation',
+}: SideNavigationProps) {
+  return (
+    <nav className="lo-side-nav" aria-label={ariaLabel}>
+      <div className="lo-side-nav__brand">{brand}</div>
+      {items.map((item) => (
+        <button
+          type="button"
+          key={item.id}
+          className="lo-side-nav__item"
+          data-active={item.id === activeId}
+          aria-current={item.id === activeId ? 'page' : undefined}
+          onClick={() => onChange?.(item.id)}
+        >
+          {item.icon && <span className="lo-side-nav__icon" aria-hidden="true">{item.icon}</span>}
+          <span>{item.label}</span>
+        </button>
+      ))}
+    </nav>
+  );
+}

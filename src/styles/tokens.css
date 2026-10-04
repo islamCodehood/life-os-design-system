@@ -153,8 +153,9 @@
   --lo-control-primary: 52px;
 }
 
-[data-experience="parent"],
-[data-experience="navigator"] {
+[data-experience="navigator"],
+[data-experience="launch"],
+[data-experience="parent"] {
   --lo-control-standard: 44px;
   --lo-control-primary: 48px;
 }

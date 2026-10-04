@@ -25,7 +25,7 @@
 .lo-child-summary__head { display: flex; align-items: center; gap: var(--lo-space-3); }
 .lo-child-summary h3 { margin: var(--lo-space-2) 0 0; font-size: var(--lo-type-h3); }
 .lo-child-summary p { margin: 0; color: var(--lo-text-secondary); font-size: var(--lo-type-body-sm); }
-.lo-child-summary button { justify-self: start; border: 0; background: transparent; padding: var(--lo-space-2) 0 0; color: var(--lo-action-primary); font-weight: var(--lo-weight-semibold); cursor: pointer; }
+.lo-child-summary button { justify-self: start; border: 0; background: transparent; padding: var(--lo-space-2) 0 0; color: var(--lo-action-primary); font-weight: var(--lo-weight-semibold); cursor: pointer; display: inline-flex; align-items: center; gap: var(--lo-space-1); }
 
 @media (max-width: 900px) {
   .lo-parent-screen { grid-template-columns: 1fr; }
