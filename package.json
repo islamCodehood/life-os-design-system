@@ -1,6 +1,6 @@
 {
   "name": "@life-os/design-system",
-  "version": "0.1.0",
+  "version": "0.3.3",
   "private": true,
   "type": "module",
   "main": "./dist/index.js",
@@ -25,6 +25,8 @@
     "build": "vite build",
     "typecheck": "tsc --noEmit",
     "static-check": "node scripts/static-check.mjs",
+    "visual:test": "playwright test -c playwright.visual.config.ts",
+    "visual:update": "playwright test -c playwright.visual.config.ts --update-snapshots",
     "check": "pnpm static-check && pnpm typecheck && pnpm build-storybook && pnpm build"
   },
   "peerDependencies": {
@@ -35,8 +37,10 @@
     "lucide-react": "^0.468.0"
   },
   "devDependencies": {
+    "@playwright/test": "^1.55.0",
     "@storybook/addon-a11y": "^10.6.0",
     "@storybook/addon-docs": "^10.6.0",
+    "@storybook/addon-viewport": "^10.6.0",
     "@storybook/react-vite": "^10.6.0",
     "@types/react": "^19.1.0",
     "@types/react-dom": "^19.1.0",

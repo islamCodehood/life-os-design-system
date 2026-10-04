@@ -8,6 +8,8 @@ export * from './Toggle';
 export * from './Checkbox';
 export * from './Chip';
 export * from './Avatar';
+export * from './ChildAvatar';
+export * from './EmptyState';
 export * from './Card';
 export * from './ProgressBar';
 export * from './TaskCard';
