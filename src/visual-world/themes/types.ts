@@ -16,6 +16,11 @@ export interface WorldRegionManifest {
   label: string;
   x: number;
   y: number;
+  zIndex: number;
+  labelOffset: {
+    x: number;
+    y: number;
+  };
   stages: WorldStageDefinition[];
 }
 
@@ -26,19 +31,26 @@ export interface WorldAccentManifest {
 
 export interface WorldThemePalette {
   sky: string;
+  skySoft: string;
   water: string;
   waterDeep: string;
+  foam: string;
   grass: string;
+  grassLight: string;
   grassDark: string;
   sand: string;
   stone: string;
+  stoneLight: string;
   wood: string;
+  woodDark: string;
   clay: string;
   cream: string;
   leaf: string;
+  leafLight: string;
   flower: string;
   lavender: string;
   gold: string;
+  inkSoft: string;
 }
 
 export interface WorldThemeManifest {

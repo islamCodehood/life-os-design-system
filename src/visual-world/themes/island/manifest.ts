@@ -1,10 +1,10 @@
 import type { WorldThemeManifest } from '../types';
 
 const stages = (labels: [string, string, string, string]) => [
-  { stage: 0, label: labels[0], scale: 0.78, detail: 0 as const },
-  { stage: 1, label: labels[1], scale: 0.9, detail: 1 as const },
+  { stage: 0, label: labels[0], scale: 0.82, detail: 0 as const },
+  { stage: 1, label: labels[1], scale: 0.92, detail: 1 as const },
   { stage: 2, label: labels[2], scale: 1, detail: 2 as const },
-  { stage: 3, label: labels[3], scale: 1.08, detail: 3 as const },
+  { stage: 3, label: labels[3], scale: 1.06, detail: 3 as const },
 ];
 
 export const islandThemeManifest: WorldThemeManifest = {
@@ -12,20 +12,27 @@ export const islandThemeManifest: WorldThemeManifest = {
   name: 'Growing Island',
   viewBox: { width: 1200, height: 760 },
   palette: {
-    sky: '#DCECF0',
-    water: '#8FC0C1',
-    waterDeep: '#6FA7AF',
-    grass: '#9EB68A',
-    grassDark: '#6F8765',
-    sand: '#E7D3A7',
-    stone: '#B9AF9A',
-    wood: '#9B7154',
-    clay: '#BB765D',
-    cream: '#F4EEDC',
-    leaf: '#78936C',
-    flower: '#C9857B',
-    lavender: '#A291B8',
-    gold: '#D4B365',
+    sky: '#D8E9EC',
+    skySoft: '#EEF5F3',
+    water: '#91BDBE',
+    waterDeep: '#679DA5',
+    foam: '#F8FBF7',
+    grass: '#9DB487',
+    grassLight: '#B9C99F',
+    grassDark: '#667C5F',
+    sand: '#E6D0A2',
+    stone: '#AFA691',
+    stoneLight: '#D2CABA',
+    wood: '#9A7054',
+    woodDark: '#72533F',
+    clay: '#B97760',
+    cream: '#F5EFDF',
+    leaf: '#758E69',
+    leafLight: '#9FB590',
+    flower: '#C98279',
+    lavender: '#9D8AAE',
+    gold: '#D2B067',
+    inkSoft: '#4A5046',
   },
   regions: {
     home: {
@@ -33,6 +40,8 @@ export const islandThemeManifest: WorldThemeManifest = {
       label: 'Home',
       x: 350,
       y: 330,
+      zIndex: 40,
+      labelOffset: { x: 0, y: 106 },
       stages: stages(['Foundation', 'Cozy Home', 'Growing Home', 'Strong Home']),
     },
     independence: {
@@ -40,6 +49,8 @@ export const islandThemeManifest: WorldThemeManifest = {
       label: 'Independence Path',
       x: 610,
       y: 430,
+      zIndex: 70,
+      labelOffset: { x: 0, y: 116 },
       stages: stages(['First Step', 'Path Begins', 'Bridge Growing', 'Bridge Complete']),
     },
     library: {
@@ -47,6 +58,8 @@ export const islandThemeManifest: WorldThemeManifest = {
       label: 'Learning Library',
       x: 305,
       y: 515,
+      zIndex: 80,
+      labelOffset: { x: 0, y: 112 },
       stages: stages(['Reading Nook', 'Small Library', 'Learning House', 'Grand Library']),
     },
     goals: {
@@ -54,6 +67,8 @@ export const islandThemeManifest: WorldThemeManifest = {
       label: 'Goal Observatory',
       x: 775,
       y: 245,
+      zIndex: 20,
+      labelOffset: { x: 0, y: 102 },
       stages: stages(['Lookout', 'Small Scope', 'Observatory', 'Star Observatory']),
     },
     giving: {
@@ -61,6 +76,8 @@ export const islandThemeManifest: WorldThemeManifest = {
       label: 'Giving Garden',
       x: 825,
       y: 500,
+      zIndex: 75,
+      labelOffset: { x: 0, y: 110 },
       stages: stages(['Seed Bed', 'Young Garden', 'Giving Garden', 'Blooming Garden']),
     },
     money: {
@@ -68,6 +85,8 @@ export const islandThemeManifest: WorldThemeManifest = {
       label: 'Money Harbor',
       x: 980,
       y: 395,
+      zIndex: 60,
+      labelOffset: { x: 0, y: 110 },
       stages: stages(['Quiet Shore', 'Small Dock', 'Harbor', 'Harbor Village']),
     },
     family: {
@@ -75,6 +94,8 @@ export const islandThemeManifest: WorldThemeManifest = {
       label: 'Family Garden',
       x: 535,
       y: 205,
+      zIndex: 10,
+      labelOffset: { x: 0, y: -96 },
       stages: stages(['Shared Ground', 'Young Tree', 'Family Garden', 'Gathering Garden']),
     },
   },

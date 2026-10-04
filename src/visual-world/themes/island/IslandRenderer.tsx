@@ -32,6 +32,7 @@ export function IslandRenderer({
       className="lo-island-renderer"
       data-profile={state.profile}
       data-theme={state.themeId}
+      data-transition={state.transition?.type}
     >
       <div className="lo-island-canvas">
         <svg
@@ -44,15 +45,64 @@ export function IslandRenderer({
           <IslandBackgroundLayer palette={manifest.palette} />
           <IslandTerrainLayer palette={manifest.palette} />
           <IslandPathLayer palette={manifest.palette} />
+          <IslandGrowthLayer palette={manifest.palette} regions={regions} />
           <IslandStructuresLayer
             palette={manifest.palette}
             regions={regions}
-            showLabels={showLabels}
-            onRegionSelect={onRegionSelect}
+            transition={state.transition}
           />
-          <IslandGrowthLayer palette={manifest.palette} regions={regions} />
-          <IslandEffectsLayer palette={manifest.palette} regions={regions} />
+          <IslandEffectsLayer
+            palette={manifest.palette}
+            regions={regions}
+            manifest={manifest}
+            transition={state.transition}
+          />
         </svg>
+
+        {showLabels && (
+          <div className="lo-island-label-layer" aria-label="Island regions">
+            {regions.map((region) => {
+              const label = region.state.label ?? region.manifest.label;
+              const x = region.manifest.x + region.manifest.labelOffset.x;
+              const y = region.manifest.y + region.manifest.labelOffset.y;
+              const style = {
+                '--lo-world-label-x': `${(x / manifest.viewBox.width) * 100}%`,
+                '--lo-world-label-y': `${(y / manifest.viewBox.height) * 100}%`,
+              } as CSSProperties;
+              const content = (
+                <>
+                  <span className="lo-island-label__title">{label}</span>
+                  <span className="lo-island-label__stage">
+                    {region.state.status === 'locked' ? 'Not active yet' : region.stage.label}
+                  </span>
+                </>
+              );
+
+              return onRegionSelect && region.state.status !== 'locked' ? (
+                <button
+                  key={region.id}
+                  type="button"
+                  className="lo-island-label"
+                  style={style}
+                  data-status={region.state.status}
+                  onClick={() => onRegionSelect(region.id)}
+                  aria-label={`${label}, ${region.stage.label}`}
+                >
+                  {content}
+                </button>
+              ) : (
+                <div
+                  key={region.id}
+                  className="lo-island-label"
+                  style={style}
+                  data-status={region.state.status}
+                >
+                  {content}
+                </div>
+              );
+            })}
+          </div>
+        )}
 
         {state.profile !== 'focused' && state.accents?.map((accent) => {
           const definition = manifest.accents[accent.type];
