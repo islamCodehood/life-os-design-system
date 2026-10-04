@@ -38,3 +38,9 @@
   .lo-screen-stage { padding: 0; }
   .lo-mobile-screen, .lo-mobile-screen--wide { inline-size: 100%; min-block-size: 100vh; border: 0; border-radius: 0; box-shadow: none; }
 }
+
+
+.lo-parent-family-world { display: grid; gap: var(--lo-space-4); }
+.lo-parent-family-world > header { display: grid; gap: var(--lo-space-1); }
+.lo-parent-family-world > header h2 { margin: 0; font-size: var(--lo-type-h2); }
+.lo-parent-family-world > header p { margin: 0; color: var(--lo-text-secondary); font-size: var(--lo-type-body-sm); }
