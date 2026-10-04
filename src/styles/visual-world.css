@@ -7,10 +7,11 @@
 .lo-island-canvas {
   position: relative;
   overflow: hidden;
-  border: 1px solid var(--lo-border-default);
+  border: 1px solid color-mix(in srgb, var(--lo-border-default) 78%, transparent);
   border-radius: var(--lo-radius-2xl);
-  background: #DCECF0;
-  box-shadow: var(--lo-shadow-1);
+  background: #D8E9EC;
+  box-shadow: 0 10px 32px rgba(67, 82, 68, .08);
+  isolation: isolate;
 }
 
 .lo-island-svg {
@@ -20,23 +21,26 @@
   aspect-ratio: 1200 / 760;
 }
 
+.lo-island-cloud,
+.lo-island-water-lines,
+.lo-island-foliage,
+.lo-island-birds {
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+.lo-island-cloud--far { animation: lo-world-cloud-drift-far 28s ease-in-out infinite alternate; }
+.lo-island-cloud--near { animation: lo-world-cloud-drift-near 22s ease-in-out infinite alternate; }
+.lo-island-water-lines { animation: lo-world-water-breathe 8s ease-in-out infinite alternate; }
+.lo-island-birds { animation: lo-world-birds-drift 18s ease-in-out infinite alternate; }
+.lo-island-foliage { animation: lo-world-foliage-sway 6s ease-in-out infinite alternate; }
+
 .lo-island-region {
   transform-box: fill-box;
   transform-origin: center;
-  cursor: default;
-  transition: opacity var(--lo-motion-normal) var(--lo-ease-standard),
+  transition:
+    opacity var(--lo-motion-normal) var(--lo-ease-standard),
     filter var(--lo-motion-normal) var(--lo-ease-standard);
-}
-
-.lo-island-region[role="button"]:not([data-status="locked"]) { cursor: pointer; }
-.lo-island-region[role="button"]:not([data-status="locked"]):hover .lo-island-region__structure {
-  filter: brightness(1.035);
-}
-.lo-island-region[role="button"]:focus-visible {
-  outline: none;
-}
-.lo-island-region[role="button"]:focus-visible .lo-island-region__structure {
-  filter: drop-shadow(0 0 7px rgba(83, 101, 77, .55));
 }
 
 .lo-island-region[data-status="locked"] {
@@ -44,65 +48,211 @@
   filter: saturate(.35);
 }
 
-.lo-island-region__label {
-  fill: #454840;
-  font-size: 17px;
-  font-weight: 600;
-  paint-order: stroke;
-  stroke: rgba(247, 246, 241, .88);
-  stroke-width: 6px;
-  stroke-linejoin: round;
+.lo-island-region__asset {
+  transform-box: fill-box;
+  transform-origin: center bottom;
+}
+
+.lo-island-region[data-transition="stage-change"] .lo-island-region__asset {
+  animation: lo-world-stage-reveal 900ms var(--lo-ease-enter) both;
+}
+
+.lo-island-region[data-transition="milestone"] .lo-island-region__asset {
+  animation: lo-world-milestone-asset 1000ms var(--lo-ease-enter) both;
+}
+
+.lo-island-region[data-transition="recovery"] .lo-island-region__asset {
+  animation: lo-world-recovery-settle 760ms var(--lo-ease-standard) both;
+}
+
+.lo-island-region[data-transition="graduation"] .lo-bridge__deck {
+  transform-box: fill-box;
+  transform-origin: left center;
+  animation: lo-world-bridge-build 920ms var(--lo-ease-enter) both;
+}
+.lo-island-region[data-transition="graduation"] .lo-bridge__rail {
+  animation: lo-world-bridge-rail 700ms 620ms var(--lo-ease-enter) both;
+}
+.lo-island-region[data-transition="graduation"] .lo-bridge__lanterns {
+  animation: lo-world-bridge-lanterns 600ms 1180ms var(--lo-ease-enter) both;
+}
+
+.lo-island-stage-detail {
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+.lo-island-star {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: lo-world-star-twinkle 3.8s ease-in-out infinite alternate;
+}
+
+.lo-harbor__beacon {
+  filter: drop-shadow(0 0 6px rgba(210, 176, 103, .5));
+  animation: lo-world-beacon 3.4s ease-in-out infinite alternate;
 }
 
 .lo-island-layer--growth {
   transition: opacity var(--lo-motion-normal) var(--lo-ease-standard);
 }
 
+.lo-island-label-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 5;
+}
+
+.lo-island-label {
+  position: absolute;
+  left: var(--lo-world-label-x);
+  top: var(--lo-world-label-y);
+  transform: translate(-50%, -50%);
+  min-inline-size: 92px;
+  max-inline-size: 160px;
+  display: grid;
+  gap: 2px;
+  border: 1px solid rgba(255, 255, 255, .82);
+  border-radius: 11px;
+  background: rgba(252, 251, 247, .93);
+  color: #252920;
+  padding: 6px 9px 7px;
+  box-shadow: 0 3px 10px rgba(45, 53, 43, .11);
+  text-align: center;
+  line-height: 1.15;
+  backdrop-filter: blur(4px);
+  pointer-events: auto;
+}
+
+button.lo-island-label {
+  font: inherit;
+  cursor: pointer;
+}
+
+button.lo-island-label:hover {
+  border-color: color-mix(in srgb, var(--lo-sage-500) 50%, white);
+  background: rgba(252, 251, 247, .98);
+  transform: translate(-50%, -50%) translateY(-1px);
+}
+
+button.lo-island-label:focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--lo-sage-700) 46%, transparent);
+  outline-offset: 2px;
+}
+
+.lo-island-label[data-status="locked"] {
+  opacity: .68;
+}
+
+.lo-island-label__title {
+  font-size: clamp(13px, 1.35vw, 16px);
+  font-weight: 650;
+  letter-spacing: -.01em;
+}
+
+.lo-island-label__stage {
+  color: #64695F;
+  font-size: clamp(11px, 1vw, 12.5px);
+  font-weight: 500;
+}
+
 .lo-island-pulse {
   transform-box: fill-box;
   transform-origin: center;
-  animation: lo-world-pulse 2.4s var(--lo-ease-standard) infinite;
+  animation: lo-world-pulse 2.8s var(--lo-ease-standard) infinite;
+}
+
+.lo-world-transition-effect {
+  pointer-events: none;
+}
+
+.lo-recovery-sequence__ring {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: lo-world-recovery-ring 950ms var(--lo-ease-standard) both;
+}
+.lo-recovery-sequence__sprout {
+  transform-box: fill-box;
+  transform-origin: center bottom;
+  animation: lo-world-recovery-sprout 950ms 150ms var(--lo-ease-enter) both;
+}
+
+.lo-milestone-sequence__halo {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: lo-world-milestone-halo 1200ms var(--lo-ease-enter) both;
+}
+.lo-milestone-ray {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: lo-world-milestone-ray 900ms var(--lo-ease-enter) both;
+}
+.lo-milestone-ray:nth-child(2) { animation-delay: 120ms; }
+.lo-milestone-ray:nth-child(3) { animation-delay: 220ms; }
+
+.lo-graduation-sequence__path {
+  stroke-dasharray: 230;
+  stroke-dashoffset: 230;
+  animation: lo-world-graduation-path 1100ms 300ms var(--lo-ease-standard) forwards;
+}
+.lo-graduation-sequence__light {
+  transform-box: fill-box;
+  transform-origin: center;
+  opacity: 0;
+  animation: lo-world-graduation-light 460ms var(--lo-ease-enter) forwards;
+}
+.lo-graduation-sequence__light--1 { animation-delay: 850ms; }
+.lo-graduation-sequence__light--2 { animation-delay: 1120ms; }
+.lo-graduation-sequence__light--3 { animation-delay: 1390ms; }
+
+.lo-stage-transition-ring {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: lo-world-stage-ring 900ms var(--lo-ease-enter) both;
 }
 
 .lo-world-accent {
   position: absolute;
   inset-inline-start: var(--lo-world-accent-x);
   inset-block-start: var(--lo-world-accent-y);
+  z-index: 7;
   display: grid;
   place-items: center;
-  inline-size: 30px;
-  block-size: 30px;
-  border: 1px solid rgba(255,255,255,.75);
+  inline-size: 32px;
+  block-size: 32px;
+  border: 1px solid rgba(255,255,255,.78);
   border-radius: 50%;
-  background: rgba(255,255,255,.78);
-  box-shadow: var(--lo-shadow-1);
+  background: rgba(255,255,255,.84);
+  box-shadow: 0 3px 10px rgba(45, 53, 43, .12);
   font-size: 18px;
-  transform: translate(-50%, -145%);
+  transform: translate(-50%, -155%);
   animation: lo-world-accent-arrive 500ms var(--lo-ease-enter) both;
 }
 
 [dir="rtl"] .lo-world-accent {
-  transform: translate(50%, -145%);
+  transform: translate(50%, -155%);
 }
 
 .lo-island-renderer__title {
   color: var(--lo-text-secondary);
-  font-size: var(--lo-type-label-md);
+  font-size: var(--lo-type-body-sm);
   font-weight: var(--lo-weight-medium);
   text-align: center;
 }
 
 .lo-island-renderer[data-profile="balanced"] .lo-island-layer--growth {
-  opacity: .72;
+  opacity: .74;
 }
 
-.lo-island-renderer[data-profile="focused"] .lo-island-layer--background circle,
-.lo-island-renderer[data-profile="focused"] .lo-island-layer--background ellipse {
-  opacity: .18;
+.lo-island-renderer[data-profile="balanced"] .lo-island-label__stage {
+  display: none;
 }
 
+.lo-island-renderer[data-profile="focused"] .lo-island-cloud,
+.lo-island-renderer[data-profile="focused"] .lo-island-birds,
 .lo-island-renderer[data-profile="focused"] .lo-island-layer--growth {
-  opacity: .28;
+  opacity: .22;
 }
 
 .lo-world-stage-grid {
@@ -119,37 +269,218 @@
   font-size: var(--lo-type-body-sm);
 }
 
+.lo-world-art-gallery {
+  inline-size: min(1120px, 94vw);
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--lo-space-5);
+}
+
+.lo-world-art-card {
+  border: 1px solid var(--lo-border-default);
+  border-radius: var(--lo-radius-xl);
+  background: var(--lo-bg-page);
+  padding: var(--lo-space-4);
+}
+
+.lo-world-motion-lab {
+  inline-size: min(980px, 94vw);
+  display: grid;
+  gap: var(--lo-space-4);
+}
+
+.lo-world-motion-lab__controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--lo-space-2);
+}
+
+@keyframes lo-world-cloud-drift-far {
+  from { transform: translateX(-8px); }
+  to { transform: translateX(18px); }
+}
+
+@keyframes lo-world-cloud-drift-near {
+  from { transform: translateX(10px); }
+  to { transform: translateX(-24px); }
+}
+
+@keyframes lo-world-water-breathe {
+  from { transform: translateX(-10px); opacity: .88; }
+  to { transform: translateX(14px); opacity: 1; }
+}
+
+@keyframes lo-world-birds-drift {
+  from { transform: translate(-6px, 1px); }
+  to { transform: translate(12px, -4px); }
+}
+
+@keyframes lo-world-foliage-sway {
+  from { transform: rotate(-1.5deg); }
+  to { transform: rotate(1.5deg); }
+}
+
+@keyframes lo-world-star-twinkle {
+  from { opacity: .55; transform: scale(.9); }
+  to { opacity: 1; transform: scale(1.12); }
+}
+
+@keyframes lo-world-beacon {
+  from { opacity: .55; }
+  to { opacity: 1; }
+}
+
 @keyframes lo-world-pulse {
-  0%, 100% { opacity: .18; transform: scale(.92); }
-  50% { opacity: .58; transform: scale(1.08); }
+  0%, 100% { opacity: .12; transform: scale(.94); }
+  50% { opacity: .48; transform: scale(1.07); }
+}
+
+@keyframes lo-world-stage-reveal {
+  0% { opacity: .35; transform: translateY(12px) scale(.9); filter: saturate(.65); }
+  65% { opacity: 1; transform: translateY(-2px) scale(1.025); }
+  100% { opacity: 1; transform: translateY(0) scale(1); filter: saturate(1); }
+}
+
+@keyframes lo-world-stage-ring {
+  0% { opacity: .68; transform: scale(.55); }
+  100% { opacity: 0; transform: scale(1.35); }
+}
+
+@keyframes lo-world-recovery-settle {
+  0% { transform: translateY(5px) rotate(-1.5deg); }
+  55% { transform: translateY(-2px) rotate(.8deg); }
+  100% { transform: translateY(0) rotate(0); }
+}
+
+@keyframes lo-world-recovery-ring {
+  0% { opacity: .6; transform: scale(.6); }
+  100% { opacity: 0; transform: scale(1.4); }
+}
+
+@keyframes lo-world-recovery-sprout {
+  0% { opacity: 0; transform: translateY(12px) scale(.5); }
+  65% { opacity: 1; transform: translateY(-2px) scale(1.06); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes lo-world-milestone-asset {
+  0% { opacity: .6; transform: scale(.9); }
+  70% { opacity: 1; transform: scale(1.035); }
+  100% { transform: scale(1); }
+}
+
+@keyframes lo-world-milestone-halo {
+  0% { opacity: 0; transform: scale(.5); }
+  45% { opacity: .24; }
+  100% { opacity: 0; transform: scale(1.45); }
+}
+
+@keyframes lo-world-milestone-ray {
+  0% { opacity: 0; transform: scale(.2) rotate(-25deg); }
+  65% { opacity: 1; transform: scale(1.15) rotate(5deg); }
+  100% { opacity: .75; transform: scale(1) rotate(0); }
+}
+
+@keyframes lo-world-bridge-build {
+  from { opacity: .3; transform: scaleX(.12); }
+  to { opacity: 1; transform: scaleX(1); }
+}
+
+@keyframes lo-world-bridge-rail {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes lo-world-bridge-lanterns {
+  0% { opacity: 0; transform: scale(.3); }
+  70% { opacity: 1; transform: scale(1.18); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+@keyframes lo-world-graduation-path {
+  to { stroke-dashoffset: 0; }
+}
+
+@keyframes lo-world-graduation-light {
+  0% { opacity: 0; transform: scale(.3); }
+  70% { opacity: 1; transform: scale(1.25); }
+  100% { opacity: 1; transform: scale(1); }
 }
 
 @keyframes lo-world-accent-arrive {
-  from { opacity: 0; translate: 0 8px; scale: .8; }
+  from { opacity: 0; translate: 0 8px; scale: .82; }
   to { opacity: 1; translate: 0 0; scale: 1; }
+}
+
+[data-motion="reduced"] .lo-island-cloud,
+[data-motion="reduced"] .lo-island-water-lines,
+[data-motion="reduced"] .lo-island-foliage,
+[data-motion="reduced"] .lo-island-birds,
+[data-motion="reduced"] .lo-island-star,
+[data-motion="reduced"] .lo-harbor__beacon,
+[data-motion="reduced"] .lo-island-pulse,
+[data-motion="off"] .lo-island-cloud,
+[data-motion="off"] .lo-island-water-lines,
+[data-motion="off"] .lo-island-foliage,
+[data-motion="off"] .lo-island-birds,
+[data-motion="off"] .lo-island-star,
+[data-motion="off"] .lo-harbor__beacon,
+[data-motion="off"] .lo-island-pulse {
+  animation: none;
+}
+
+[data-motion="reduced"] .lo-world-transition-effect *,
+[data-motion="reduced"] .lo-island-region__asset,
+[data-motion="off"] .lo-world-transition-effect *,
+[data-motion="off"] .lo-island-region__asset,
+[data-motion="reduced"] .lo-world-accent,
+[data-motion="off"] .lo-world-accent {
+  animation: none !important;
 }
 
 [data-motion="reduced"] .lo-island-pulse,
 [data-motion="off"] .lo-island-pulse {
-  animation: none;
-  opacity: .42;
-}
-
-[data-motion="reduced"] .lo-world-accent,
-[data-motion="off"] .lo-world-accent {
-  animation: none;
+  opacity: .36;
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .lo-island-cloud,
+  .lo-island-water-lines,
+  .lo-island-foliage,
+  .lo-island-birds,
+  .lo-island-star,
+  .lo-harbor__beacon,
   .lo-island-pulse,
+  .lo-world-transition-effect *,
+  .lo-island-region__asset,
   .lo-world-accent {
-    animation: none;
+    animation: none !important;
   }
-  .lo-island-pulse { opacity: .42; }
 }
 
-@media (max-width: 680px) {
-  .lo-world-stage-grid { grid-template-columns: 1fr; }
-  .lo-island-region__label { font-size: 21px; }
-  .lo-world-accent { inline-size: 27px; block-size: 27px; font-size: 16px; }
+@media (max-width: 700px) {
+  .lo-world-stage-grid,
+  .lo-world-art-gallery {
+    grid-template-columns: 1fr;
+  }
+
+  .lo-island-label {
+    min-inline-size: 82px;
+    max-inline-size: 125px;
+    padding: 5px 7px 6px;
+  }
+
+  .lo-island-label__title {
+    font-size: 13px;
+  }
+
+  .lo-island-label__stage {
+    display: none;
+  }
+
+  .lo-world-accent {
+    inline-size: 28px;
+    block-size: 28px;
+    font-size: 16px;
+  }
 }

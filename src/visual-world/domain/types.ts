@@ -39,10 +39,30 @@ export interface WorldAccent {
   label?: string;
 }
 
+export type WorldTransitionType =
+  | 'stage-change'
+  | 'recovery'
+  | 'milestone'
+  | 'graduation';
+
+export interface WorldTransition {
+  /**
+   * Changes whenever a presentation sequence should replay.
+   * It is an animation identity, not a domain/event ID contract.
+   */
+  id: string;
+  type: WorldTransitionType;
+  regionId: WorldRegionId;
+  fromStage?: number;
+  toStage?: number;
+  label?: string;
+}
+
 export interface WorldSceneState {
   themeId: VisualWorldThemeId;
   profile: VisualizationProfile;
   title?: string;
   regions: Partial<Record<WorldRegionId, SemanticWorldRegionState>>;
   accents?: WorldAccent[];
+  transition?: WorldTransition;
 }

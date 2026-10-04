@@ -19,6 +19,8 @@ const runtimeVars = new Set([
   'lo-progress-value',
   'lo-world-accent-x',
   'lo-world-accent-y',
+  'lo-world-label-x',
+  'lo-world-label-y',
 ]);
 const undefinedVars = [...used].filter((x) => !defined.has(x) && !runtimeVars.has(x) && !x.startsWith('lo-shadow-'));
 
@@ -44,6 +46,8 @@ const requiredStories = [
   'src/states/InteractionStateMatrix.stories.tsx',
   'src/components/Icon.stories.tsx',
   'src/visual-world/themes/island/IslandRenderer.stories.tsx',
+  'src/visual-world/themes/island/IslandArtDirection.stories.tsx',
+  'src/visual-world/themes/island/IslandMotion.stories.tsx',
 ];
 const missingStories = requiredStories.filter((file) => !fs.existsSync(path.join(root, file)));
 
@@ -59,6 +63,14 @@ const requiredVisualWorld = [
   'src/visual-world/themes/island/layers/IslandStructuresLayer.tsx',
   'src/visual-world/themes/island/layers/IslandGrowthLayer.tsx',
   'src/visual-world/themes/island/layers/IslandEffectsLayer.tsx',
+  'src/visual-world/themes/island/assets/HomeAsset.tsx',
+  'src/visual-world/themes/island/assets/IndependenceAsset.tsx',
+  'src/visual-world/themes/island/assets/LibraryAsset.tsx',
+  'src/visual-world/themes/island/assets/GoalsAsset.tsx',
+  'src/visual-world/themes/island/assets/GivingAsset.tsx',
+  'src/visual-world/themes/island/assets/MoneyAsset.tsx',
+  'src/visual-world/themes/island/assets/FamilyAsset.tsx',
+  'src/visual-world/themes/island/assets/IslandRegionAsset.tsx',
 ];
 const missingVisualWorld = requiredVisualWorld.filter((file) => !fs.existsSync(path.join(root, file)));
 
@@ -73,6 +85,9 @@ const visualWorldRuleLeaks = [
   ['graduation eligibility', /graduationEligible|isEligibleForGraduation/i],
   ['independence scoring', /independenceRate|completionRate/i],
 ].flatMap(([label, regex]) => regex.test(visualWorldSource) ? [label] : []);
+
+const labelCss = read('src/styles/visual-world.css');
+const labelMinimumMissing = !/\.lo-island-label__title[\s\S]*font-size:\s*clamp\(13px/.test(labelCss);
 
 const forbidden = [
   ['legacy los- prefix', /los-/],
@@ -90,6 +105,7 @@ if (
   missingStories.length ||
   missingVisualWorld.length ||
   visualWorldRuleLeaks.length ||
+  labelMinimumMissing ||
   violations.length
 ) {
   if (undefinedVars.length) console.error('Undefined CSS variables:', undefinedVars);
@@ -99,10 +115,11 @@ if (
   if (missingStories.length) console.error('Missing required stories:', missingStories);
   if (missingVisualWorld.length) console.error('Missing Visual World files:', missingVisualWorld);
   if (visualWorldRuleLeaks.length) console.error('Visual World contains domain-rule leakage:', visualWorldRuleLeaks);
+  if (labelMinimumMissing) console.error('Visual World label title must keep a 13px minimum.');
   if (violations.length) console.error('Forbidden patterns:', violations);
   process.exit(1);
 }
 
 console.log(
-  `Static design-system checks passed (${files.length} source files, ${requiredComponents.length} core components, ${requiredPatterns.length} domain patterns, ${requiredCompoundPatterns.length} compound patterns, Visual World V1 present).`,
+  `Static design-system checks passed (${files.length} source files, ${requiredComponents.length} core components, ${requiredPatterns.length} domain patterns, ${requiredCompoundPatterns.length} compound patterns, authored Visual World V2 present).`,
 );

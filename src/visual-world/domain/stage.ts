@@ -1,4 +1,4 @@
-import type { WorldRegionId, SemanticWorldRegionState } from './types';
+import type { SemanticWorldRegionState, WorldRegionId } from './types';
 import type {
   WorldRegionManifest,
   WorldStageDefinition,
@@ -41,5 +41,6 @@ export function resolveWorldRegions(
         stage: resolveStage(definition, state.stage),
       };
     })
-    .filter((region): region is ResolvedWorldRegion => Boolean(region));
+    .filter((region): region is ResolvedWorldRegion => Boolean(region))
+    .sort((a, b) => a.manifest.zIndex - b.manifest.zIndex);
 }
