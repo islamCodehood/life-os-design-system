@@ -21,7 +21,8 @@ import { SideNavigation } from '../components/SideNavigation';
 import { ParentAttentionFeed } from '../patterns/compound/ParentAttentionFeed';
 import { StoryTimeline } from '../patterns/compound/StoryTimeline';
 import { TodayResponsibilityGroup } from '../patterns/compound/TodayResponsibilityGroup';
-import { WorldOverview } from '../patterns/compound/WorldOverview';
+import { IslandRenderer } from '../visual-world/themes/island/IslandRenderer';
+import type { WorldSceneState } from '../visual-world/domain/types';
 
 const meta = {
   title: 'Screens/Core',
@@ -45,6 +46,38 @@ const builderNav = [
   { id: 'money', label: 'Money', icon: <Icon icon={Wallet} size="lg" /> },
   { id: 'family', label: 'Family', icon: <Icon icon={Users} size="lg" /> },
 ];
+
+const journeyWorld: WorldSceneState = {
+  themeId: 'island',
+  profile: 'immersive',
+  title: 'My World',
+  regions: {
+    home: { id: 'home', stage: 2, status: 'growing' },
+    independence: { id: 'independence', stage: 2, status: 'growing' },
+    library: { id: 'library', stage: 2, status: 'growing' },
+    goals: { id: 'goals', stage: 1, status: 'available' },
+    giving: { id: 'giving', stage: 1, status: 'available' },
+    money: { id: 'money', stage: 1, status: 'available' },
+    family: { id: 'family', stage: 2, status: 'growing' },
+  },
+  accents: [
+    { id: 'reading-recovery', type: 'recovery', regionId: 'library' },
+  ],
+};
+
+const familyWorld: WorldSceneState = {
+  themeId: 'island',
+  profile: 'balanced',
+  title: 'What we are building together',
+  regions: {
+    family: { id: 'family', stage: 3, status: 'complete', label: 'Family Garden' },
+    giving: { id: 'giving', stage: 2, status: 'growing', label: 'Giving Garden' },
+    library: { id: 'library', stage: 2, status: 'growing', label: 'Book Project' },
+  },
+  accents: [
+    { id: 'family-contribution', type: 'family-contribution', regionId: 'family' },
+  ],
+};
 
 export const ExplorerToday: Story = {
   globals: { experience: 'explorer' },
@@ -141,12 +174,9 @@ export const Journey: Story = {
           </div>
         </header>
 
-        <WorldOverview
-          title="My World"
-          regions={[
-            { id: 'path', title: 'Independence Path', state: 'growing', stateLabel: 'Growing', progress: 72, progressLabel: 'Path growth', visual: '🌉', description: 'Growing independence appears here.' },
-            { id: 'goals', title: 'Goal Observatory', state: 'available', progress: 55, progressTone: 'goal', visual: '🔭', description: 'Personal goals and milestones.' },
-          ]}
+        <IslandRenderer
+          state={journeyWorld}
+          ariaLabel="Eyad’s growing island with learning, goals, independence and family regions"
         />
 
         <StoryTimeline
@@ -215,15 +245,16 @@ export const ParentHome: Story = {
           </div>
         </section>
 
-        <WorldOverview
-          variant="family"
-          title="What we are building together"
-          description="Shared progress without contribution ranking."
-          regions={[
-            { id: 'books', title: 'Book Donation Project', state: 'growing', stateLabel: '14 of 20 books', progress: 70, progressLabel: 'Family goal', visual: '📚', description: 'Everyone can contribute differently.' },
-            { id: 'garden', title: 'Family Garden', state: 'available', visual: '🌿', description: 'Meaningful shared moments appear here.' },
-          ]}
-        />
+        <section className="lo-parent-family-world">
+          <header>
+            <h2>Family World</h2>
+            <p>Shared progress without contribution ranking.</p>
+          </header>
+          <IslandRenderer
+            state={familyWorld}
+            ariaLabel="Family island showing the shared garden, giving garden and book project"
+          />
+        </section>
       </main>
     </div>
   ),
