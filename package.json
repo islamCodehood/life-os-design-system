@@ -27,7 +27,8 @@
     "static-check": "node scripts/static-check.mjs",
     "visual:test": "playwright test -c playwright.visual.config.ts",
     "visual:update": "playwright test -c playwright.visual.config.ts --update-snapshots",
-    "check": "pnpm static-check && pnpm typecheck && pnpm build-storybook && pnpm build"
+    "check": "pnpm static-check && pnpm typecheck && pnpm build-storybook && pnpm build",
+    "prepare": "pnpm build"
   },
   "peerDependencies": {
     "react": ">=19",
