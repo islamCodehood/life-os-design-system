@@ -8,7 +8,7 @@ Design system is public and can be consumed directly from GitHub.
 
 Pinned design-system handoff commit:
 
-`b69e66f589b80faf9968a2ace0e08737bfc2b8f0`
+`506ab3ef3723e54df858fa0ff9e0fb3d2f06b055`
 
 MagicPath project:
 
