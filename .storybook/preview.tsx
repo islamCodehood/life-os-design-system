@@ -53,7 +53,7 @@ const preview: Preview = {
           dir={dir}
           data-experience={context.globals.experience}
           data-motion={context.globals.motion ?? 'full'}
-          style={{ minHeight: '100vh', padding: 24 }}
+          style={{ minHeight: '100vh' }}
         >
           <Story />
         </div>
@@ -61,8 +61,44 @@ const preview: Preview = {
     },
   ],
   parameters: {
-    options: { storySort: { order: ['Foundations', 'Components', 'Patterns', 'States', 'Screens'] } },
-    a11y: { test: 'todo' },
+    viewport: {
+      options: {
+        mobile390: {
+          name: 'Mobile · 390',
+          styles: { width: '390px', height: '844px' },
+          type: 'mobile',
+        },
+        tablet768: {
+          name: 'Tablet · 768',
+          styles: { width: '768px', height: '1024px' },
+          type: 'tablet',
+        },
+        desktop1024: {
+          name: 'Desktop · 1024',
+          styles: { width: '1024px', height: '900px' },
+          type: 'desktop',
+        },
+        desktop1440: {
+          name: 'Desktop · 1440',
+          styles: { width: '1440px', height: '1000px' },
+          type: 'desktop',
+        },
+      },
+    },
+    options: {
+      storySort: {
+        order: [
+          'Foundations',
+          'Components',
+          'Patterns',
+          'States',
+          'Visual World',
+          'Screens',
+          'Contracts',
+        ],
+      },
+    },
+    a11y: { test: 'error' },
   },
 };
 
