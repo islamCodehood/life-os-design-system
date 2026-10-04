@@ -6,6 +6,6 @@ export default defineConfig({
   plugins: [react(), dts({ exclude: ['**/*.stories.*'] })],
   build: {
     lib: { entry: 'src/index.ts', formats: ['es'], fileName: 'index', cssFileName: 'styles' },
-    rollupOptions: { external: ['react', 'react-dom', 'react/jsx-runtime'] },
+    rollupOptions: { external: ['react', 'react-dom', 'react/jsx-runtime', 'lucide-react'] },
   },
 });
