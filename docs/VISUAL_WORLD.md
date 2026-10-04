@@ -74,7 +74,7 @@ Stage values are supplied by a read model / semantic world projection. The theme
 - theme-specific label
 - scale
 - visual detail level
-- spatial label placement
+- responsive label placements
 - render order
 
 The design system intentionally does **not** define rules such as “10 tasks = stage 2”. Those rules belong upstream.
@@ -92,18 +92,28 @@ Island rendering remains SVG-first and layered:
 7. HTML label layer — scale-independent readable region text
 8. Emoji accent layer — small emotional accents
 
-## Text legibility
+## Responsive label system
 
-Region labels are intentionally **HTML overlays, not SVG text**. This prevents text shrinking to unreadable sizes when the 1200px SVG scales down to a 390px phone.
+Region labels are intentionally **HTML overlays, not SVG text**. This prevents text shrinking when the 1200px scene scales down.
 
-Rules:
+The label system uses the **Island container width**, not the browser viewport. Each theme region defines three independent placements:
 
-- title: 13px minimum on mobile, up to 16px on larger surfaces
-- warm near-opaque surface behind text
-- strong dark text contrast
-- short stage subtitle; hidden on small screens and in Balanced profile to reduce clutter
-- labels remain independently focusable/clickable when region navigation is enabled
-- RTL changes text flow but does not geometrically mirror the Island
+- desktop
+- tablet
+- mobile
+
+Container queries switch between those coordinates. On a narrow Island, the labels move to collision-safe positions around the scene instead of remaining attached to desktop coordinates.
+
+Mobile behavior:
+
+- 13px minimum title size; text is never reduced below the readability floor
+- stage subtitles are hidden
+- compact labels are used where needed: e.g. “Independence” instead of “Independence Path”
+- compact labels can be localized by the semantic read model through `compactLabel`
+- labels use a warm high-contrast backing surface
+- the Island geometry is not mirrored in RTL; localized labels flow correctly inside their responsive positions
+
+Storybook includes 320px, 390px, 480px and 768px container checks plus an Arabic compact-label example.
 
 ## Ambient motion
 
@@ -191,7 +201,7 @@ Age supplies recommended defaults only. Preference controls actual presentation.
 - Reduced Motion and Motion Off suppress ambient and sequence animations while preserving final state.
 - System `prefers-reduced-motion` is also respected.
 - Emoji accents expose semantic labels.
-- Localized labels may be supplied by the world read model.
+- Localized full and compact labels may be supplied by the world read model.
 
 ## Future asset upgrades
 

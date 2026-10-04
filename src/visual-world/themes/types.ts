@@ -11,16 +11,29 @@ export interface WorldStageDefinition {
   detail: 0 | 1 | 2 | 3;
 }
 
+export interface WorldLabelPlacement {
+  x: number;
+  y: number;
+}
+
+export interface ResponsiveWorldLabelPlacement {
+  desktop: WorldLabelPlacement;
+  tablet: WorldLabelPlacement;
+  mobile: WorldLabelPlacement;
+}
+
 export interface WorldRegionManifest {
   id: WorldRegionId;
   label: string;
+  compactLabel?: string;
   x: number;
   y: number;
   zIndex: number;
-  labelOffset: {
-    x: number;
-    y: number;
-  };
+  /**
+   * Label coordinates are intentionally independent from the SVG asset origin.
+   * Different placements prevent collisions as the Island container gets narrower.
+   */
+  labelPlacement: ResponsiveWorldLabelPlacement;
   stages: WorldStageDefinition[];
 }
 

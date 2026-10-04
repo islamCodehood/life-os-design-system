@@ -84,8 +84,54 @@ export const ClearMobileLabels: Story = {
         state={{
           themeId: 'island',
           profile: 'immersive',
-          title: '390px label-legibility check',
+          title: '390px collision-safe label check',
           regions: matureRegions,
+        }}
+      />
+    </div>
+  ),
+};
+
+export const ResponsiveLabelMatrix: Story = {
+  render: () => (
+    <div className="lo-world-label-test-grid">
+      {[320, 390, 480, 768].map((width) => (
+        <div className="lo-world-label-test-case" key={width}>
+          <strong>{width}px Island container</strong>
+          <div style={{ width }}>
+            <IslandRenderer
+              state={{
+                themeId: 'island',
+                profile: 'immersive',
+                regions: matureRegions,
+              }}
+              ariaLabel={`Island responsive labels at ${width} pixels`}
+            />
+          </div>
+        </div>
+      ))}
+    </div>
+  ),
+};
+
+export const LocalizedCompactLabels: Story = {
+  parameters: { globals: { locale: 'ar', experience: 'builder' } },
+  render: () => (
+    <div style={{ width: 390 }} dir="rtl" lang="ar">
+      <IslandRenderer
+        state={{
+          themeId: 'island',
+          profile: 'immersive',
+          title: 'اختبار التسميات المختصرة',
+          regions: {
+            home: { id: 'home', stage: 3, status: 'complete', label: 'المنزل', compactLabel: 'المنزل' },
+            independence: { id: 'independence', stage: 3, status: 'complete', label: 'طريق الاستقلال', compactLabel: 'الاستقلال' },
+            library: { id: 'library', stage: 3, status: 'complete', label: 'مكتبة التعلّم', compactLabel: 'التعلّم' },
+            goals: { id: 'goals', stage: 3, status: 'complete', label: 'مرصد الأهداف', compactLabel: 'الأهداف' },
+            giving: { id: 'giving', stage: 3, status: 'complete', label: 'حديقة العطاء', compactLabel: 'العطاء' },
+            money: { id: 'money', stage: 3, status: 'complete', label: 'ميناء المال', compactLabel: 'المال' },
+            family: { id: 'family', stage: 3, status: 'complete', label: 'حديقة الأسرة', compactLabel: 'الأسرة' },
+          },
         }}
       />
     </div>

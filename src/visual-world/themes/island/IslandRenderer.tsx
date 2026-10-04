@@ -4,6 +4,7 @@ import type {
   WorldRegionId,
   WorldSceneState,
 } from '../../domain/types';
+import type { WorldLabelPlacement } from '../types';
 import { IslandBackgroundLayer } from './layers/IslandBackgroundLayer';
 import { IslandEffectsLayer } from './layers/IslandEffectsLayer';
 import { IslandGrowthLayer } from './layers/IslandGrowthLayer';
@@ -16,6 +17,17 @@ export interface IslandRendererProps {
   state: WorldSceneState;
   ariaLabel?: string;
   onRegionSelect?: (regionId: WorldRegionId) => void;
+}
+
+function placementToPercent(
+  placement: WorldLabelPlacement,
+  width: number,
+  height: number,
+) {
+  return {
+    x: `${(placement.x / width) * 100}%`,
+    y: `${(placement.y / height) * 100}%`,
+  };
 }
 
 export function IslandRenderer({
@@ -62,18 +74,48 @@ export function IslandRenderer({
         {showLabels && (
           <div className="lo-island-label-layer" aria-label="Island regions">
             {regions.map((region) => {
-              const label = region.state.label ?? region.manifest.label;
-              const x = region.manifest.x + region.manifest.labelOffset.x;
-              const y = region.manifest.y + region.manifest.labelOffset.y;
+              const fullLabel = region.state.label ?? region.manifest.label;
+              const compactLabel =
+                region.state.compactLabel ??
+                region.manifest.compactLabel ??
+                fullLabel;
+              const { desktop, tablet, mobile } = region.manifest.labelPlacement;
+              const desktopPosition = placementToPercent(
+                desktop,
+                manifest.viewBox.width,
+                manifest.viewBox.height,
+              );
+              const tabletPosition = placementToPercent(
+                tablet,
+                manifest.viewBox.width,
+                manifest.viewBox.height,
+              );
+              const mobilePosition = placementToPercent(
+                mobile,
+                manifest.viewBox.width,
+                manifest.viewBox.height,
+              );
               const style = {
-                '--lo-world-label-x': `${(x / manifest.viewBox.width) * 100}%`,
-                '--lo-world-label-y': `${(y / manifest.viewBox.height) * 100}%`,
+                '--lo-world-label-x-desktop': desktopPosition.x,
+                '--lo-world-label-y-desktop': desktopPosition.y,
+                '--lo-world-label-x-tablet': tabletPosition.x,
+                '--lo-world-label-y-tablet': tabletPosition.y,
+                '--lo-world-label-x-mobile': mobilePosition.x,
+                '--lo-world-label-y-mobile': mobilePosition.y,
               } as CSSProperties;
+
               const content = (
                 <>
-                  <span className="lo-island-label__title">{label}</span>
+                  <span className="lo-island-label__title lo-island-label__title--full">
+                    {fullLabel}
+                  </span>
+                  <span className="lo-island-label__title lo-island-label__title--compact">
+                    {compactLabel}
+                  </span>
                   <span className="lo-island-label__stage">
-                    {region.state.status === 'locked' ? 'Not active yet' : region.stage.label}
+                    {region.state.status === 'locked'
+                      ? 'Not active yet'
+                      : region.stage.label}
                   </span>
                 </>
               );
@@ -84,9 +126,10 @@ export function IslandRenderer({
                   type="button"
                   className="lo-island-label"
                   style={style}
+                  data-region={region.id}
                   data-status={region.state.status}
                   onClick={() => onRegionSelect(region.id)}
-                  aria-label={`${label}, ${region.stage.label}`}
+                  aria-label={`${fullLabel}, ${region.stage.label}`}
                 >
                   {content}
                 </button>
@@ -95,6 +138,7 @@ export function IslandRenderer({
                   key={region.id}
                   className="lo-island-label"
                   style={style}
+                  data-region={region.id}
                   data-status={region.state.status}
                 >
                   {content}
