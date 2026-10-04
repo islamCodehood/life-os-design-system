@@ -6,6 +6,9 @@ import { IslandRenderer } from './IslandRenderer';
 const meta = {
   title: 'Visual World/Island Renderer',
   component: IslandRenderer,
+  args: {
+    state: { themeId: 'island', profile: 'balanced', regions: {} },
+  },
   parameters: { layout: 'centered' },
 } satisfies Meta<typeof IslandRenderer>;
 
