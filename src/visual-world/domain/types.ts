@@ -13,7 +13,7 @@ export type WorldRegionId =
 
 export type WorldRegionStatus = 'locked' | 'available' | 'growing' | 'complete';
 
-export interface WorldRegionState {
+export interface SemanticWorldRegionState {
   id: WorldRegionId;
   /**
    * Semantic stage supplied by the application/read model.
@@ -43,6 +43,6 @@ export interface WorldSceneState {
   themeId: VisualWorldThemeId;
   profile: VisualizationProfile;
   title?: string;
-  regions: Partial<Record<WorldRegionId, WorldRegionState>>;
+  regions: Partial<Record<WorldRegionId, SemanticWorldRegionState>>;
   accents?: WorldAccent[];
 }
