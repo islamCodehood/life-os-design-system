@@ -37,3 +37,8 @@ The library is derived from the approved Life OS visual references and constrain
 The initial Storybook implements Button, IconButton, TextField, TextArea, SelectField, Toggle, Checkbox / Completion control base, Chip, BottomNavigation, SideNavigation, Card, TaskCard, AttentionCard, GoalCard, ProgressBar, MoneyBucket and Avatar.
 
 Domain patterns such as Job Card, Moment Card, Graduation, Money Allocation and World Region belong to the next layer and compose these core components.
+
+## Domain pattern layer
+
+The next layer composes core components into domain-aware presentation patterns: ResponsibilityCard, JobCard, MomentCard, GraduationMilestone, MoneyAllocation and WorldRegion. These patterns preserve Life OS semantics without reimplementing business rules. See `ATOMIC_DESIGN.md`.
+

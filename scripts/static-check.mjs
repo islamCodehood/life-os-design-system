@@ -23,6 +23,11 @@ const requiredComponents = [
 ];
 const missingComponents = requiredComponents.filter((name) => !fs.existsSync(path.join(src, 'components', `${name}.tsx`)));
 
+const requiredPatterns = [
+  'ResponsibilityCard', 'JobCard', 'MomentCard', 'GraduationMilestone', 'MoneyAllocation', 'WorldRegion',
+];
+const missingPatterns = requiredPatterns.filter((name) => !fs.existsSync(path.join(src, 'patterns', `${name}.tsx`)));
+
 const forbidden = [
   ['legacy los- prefix', /los-/],
   ['undefined danger alias', /--lo-danger-fg/],
@@ -31,11 +36,12 @@ const forbidden = [
 ];
 const violations = forbidden.flatMap(([label, regex]) => regex.test(source) ? [label] : []);
 
-if (undefinedVars.length || missingComponents.length || violations.length) {
+if (undefinedVars.length || missingComponents.length || missingPatterns.length || violations.length) {
   if (undefinedVars.length) console.error('Undefined CSS variables:', undefinedVars);
   if (missingComponents.length) console.error('Missing components:', missingComponents);
+  if (missingPatterns.length) console.error('Missing domain patterns:', missingPatterns);
   if (violations.length) console.error('Forbidden patterns:', violations);
   process.exit(1);
 }
 
-console.log(`Static design-system checks passed (${files.length} source files, ${requiredComponents.length} core components).`);
+console.log(`Static design-system checks passed (${files.length} source files, ${requiredComponents.length} core components, ${requiredPatterns.length} domain patterns).`);

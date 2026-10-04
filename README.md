@@ -33,4 +33,8 @@ pnpm check
 - Graduation is a major milestone because active tracking is no longer needed.
 - Give → Save → Spend is the canonical money order.
 - Arabic/RTL and reduced-motion behavior are first-class requirements.
-# life-os-design-system
+
+## Component architecture
+
+Life OS uses a pragmatic Atomic Design hierarchy: **Foundations → Atoms → Molecules → Organisms → Domain Patterns → Screens**. See [`docs/ATOMIC_DESIGN.md`](docs/ATOMIC_DESIGN.md).
+
