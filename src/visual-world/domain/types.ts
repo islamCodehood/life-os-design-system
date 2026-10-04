@@ -22,7 +22,10 @@ export interface SemanticWorldRegionState {
   stage: number;
   status: WorldRegionStatus;
   progress?: number;
+  /** Localized full label override. */
   label?: string;
+  /** Optional localized compact label for narrow world surfaces. */
+  compactLabel?: string;
 }
 
 export type WorldAccentType =

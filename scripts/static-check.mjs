@@ -19,8 +19,12 @@ const runtimeVars = new Set([
   'lo-progress-value',
   'lo-world-accent-x',
   'lo-world-accent-y',
-  'lo-world-label-x',
-  'lo-world-label-y',
+  'lo-world-label-x-desktop',
+  'lo-world-label-y-desktop',
+  'lo-world-label-x-tablet',
+  'lo-world-label-y-tablet',
+  'lo-world-label-x-mobile',
+  'lo-world-label-y-mobile',
 ]);
 const undefinedVars = [...used].filter((x) => !defined.has(x) && !runtimeVars.has(x) && !x.startsWith('lo-shadow-'));
 
@@ -87,7 +91,19 @@ const visualWorldRuleLeaks = [
 ].flatMap(([label, regex]) => regex.test(visualWorldSource) ? [label] : []);
 
 const labelCss = read('src/styles/visual-world.css');
+const manifestSource = read('src/visual-world/themes/island/manifest.ts');
 const labelMinimumMissing = !/\.lo-island-label__title[\s\S]*font-size:\s*clamp\(13px/.test(labelCss);
+const containerLabelsMissing =
+  !/container-name:\s*island-scene/.test(labelCss) ||
+  !/@container island-scene \(max-width:\s*480px\)/.test(labelCss);
+const responsivePlacementMissing =
+  !/labelPlacement/.test(manifestSource) ||
+  !/desktop:/.test(manifestSource) ||
+  !/tablet:/.test(manifestSource) ||
+  !/mobile:/.test(manifestSource);
+const compactLabelsMissing =
+  !/compactLabel/.test(manifestSource) ||
+  !/compactLabel/.test(read('src/visual-world/domain/types.ts'));
 
 const forbidden = [
   ['legacy los- prefix', /los-/],
@@ -106,6 +122,9 @@ if (
   missingVisualWorld.length ||
   visualWorldRuleLeaks.length ||
   labelMinimumMissing ||
+  containerLabelsMissing ||
+  responsivePlacementMissing ||
+  compactLabelsMissing ||
   violations.length
 ) {
   if (undefinedVars.length) console.error('Undefined CSS variables:', undefinedVars);
@@ -116,10 +135,13 @@ if (
   if (missingVisualWorld.length) console.error('Missing Visual World files:', missingVisualWorld);
   if (visualWorldRuleLeaks.length) console.error('Visual World contains domain-rule leakage:', visualWorldRuleLeaks);
   if (labelMinimumMissing) console.error('Visual World label title must keep a 13px minimum.');
+  if (containerLabelsMissing) console.error('Visual World labels must use Island container queries.');
+  if (responsivePlacementMissing) console.error('Island regions must define desktop/tablet/mobile label placements.');
+  if (compactLabelsMissing) console.error('Visual World must support compact labels on narrow containers.');
   if (violations.length) console.error('Forbidden patterns:', violations);
   process.exit(1);
 }
 
 console.log(
-  `Static design-system checks passed (${files.length} source files, ${requiredComponents.length} core components, ${requiredPatterns.length} domain patterns, ${requiredCompoundPatterns.length} compound patterns, authored Visual World V2 present).`,
+  `Static design-system checks passed (${files.length} source files, ${requiredComponents.length} core components, ${requiredPatterns.length} domain patterns, ${requiredCompoundPatterns.length} compound patterns, authored Visual World V2 with responsive labels present).`,
 );
