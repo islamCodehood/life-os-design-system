@@ -1,0 +1,27 @@
+name: Visual Regression
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  screenshots:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - run: corepack enable
+      - run: pnpm install --no-frozen-lockfile
+      - run: pnpm exec playwright install --with-deps chromium
+      # Temporary baseline generation for the V3.3 freeze PR.
+      # Replaced by pnpm visual:test after baselines are committed.
+      - run: pnpm visual:update
+      - uses: actions/upload-artifact@v4
+        with:
+          name: visual-baselines
+          path: tests/visual/**/*-snapshots/*.png
+          if-no-files-found: error
+          retention-days: 7
