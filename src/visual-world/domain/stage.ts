@@ -1,4 +1,4 @@
-import type { WorldRegionId, WorldRegionState } from './types';
+import type { WorldRegionId, SemanticWorldRegionState } from './types';
 import type {
   WorldRegionManifest,
   WorldStageDefinition,
@@ -7,7 +7,7 @@ import type {
 
 export interface ResolvedWorldRegion {
   id: WorldRegionId;
-  state: WorldRegionState;
+  state: SemanticWorldRegionState;
   manifest: WorldRegionManifest;
   stage: WorldStageDefinition;
 }
@@ -27,7 +27,7 @@ export function resolveStage(
 
 export function resolveWorldRegions(
   manifest: WorldThemeManifest,
-  regions: Partial<Record<WorldRegionId, WorldRegionState>>,
+  regions: Partial<Record<WorldRegionId, SemanticWorldRegionState>>,
 ): ResolvedWorldRegion[] {
   return (Object.keys(manifest.regions) as WorldRegionId[])
     .map((id) => {
